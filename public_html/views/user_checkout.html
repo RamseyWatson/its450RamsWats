@@ -1,0 +1,79 @@
+<div align="center"><img src="/images/checkout_indicator1.png" /></div>
+<br clear="all" />
+
+<?php // Display the cart:
+include ('./views/checkout_cart.html');
+?> 
+
+<?php if(isset($addresses) && !empty($addresses)) : ?>
+<div class="box alt">
+	<div class="inner">Please select one of the address addresses</div>
+	<div id="user-address-error" class="error"></div>
+	<form action="checkout.php" id="select-address" method="POST">
+	<div class="field"><label for="use"><strong>Use Same Address for Billing?</strong></label><br /><input type="checkbox" name="use" value="Y" id="use" <?php if (isset($_POST['use'])) echo 'checked="checked" ';?>/></div>
+	<?php foreach($addresses as $address):?>
+		<div class="user-address">
+			
+			<input type="radio" class="select-user-address" id="user-address-<?php echo $address['id']; ?>" value="<?php echo $address['id']; ?>" name="user-address">
+			<address>
+				<?php echo $address['first_name']; ?>
+				<?php echo $address['last_name']; ?><br>
+				<?php echo $address['address1']; ?>,<br>
+				<?php if(!empty($address['address2'])) echo $address['address2'].'<br />'; ?>
+				<?php echo $address['city']; ?> - 
+				<?php echo $address['zip']; ?><br>
+				<?php echo $address['phone']; ?>
+			</address>
+
+			
+			<div class="clearfix"></div>	
+		</div>
+	<?php endforeach; ?>
+	<input type="submit" name="btnContinue" class="button" id="btnContinue" value="Continue" />
+	</form>
+</div>
+
+<?php else: ?>
+
+	<div class="box alt">
+		<p>There is no address associated with you right now please, add an address</p>
+	</div>
+
+<?php endif; ?>
+
+
+
+<div class="box alt">
+   	<div class="inner">
+		<h2>Add a New Address</h2>
+		<p>Please Add an address where the items will be delivered. <span class="required">*</span> Indicates a required field. </p>
+<form action="/checkout.php" method="POST" class="add-addess">
+<?php // Need the form function:
+include ('./includes/form_functions.inc.php');
+?>
+	<fieldset>	
+		<div class="field"><label for="use"><strong>Use Same Address for Billing?</strong></label><br /><input type="checkbox" name="use" value="Y" id="use" <?php if (isset($_POST['use'])) echo 'checked="checked" ';?>/></div>
+
+	<div class="field"><label for="first_name"><strong>First Name <span class="required">*</span></strong></label><br /><?php create_form_input('first_name', 'text', $shipping_errors); ?></div>
+	
+	<div class="field"><label for="last_name"><strong>Last Name <span class="required">*</span></strong></label><br /><?php create_form_input('last_name', 'text', $shipping_errors); ?></div>
+	
+	<div class="field"><label for="address1"><strong>Street Address <span class="required">*</span></strong></label><br /><?php create_form_input('address1', 'text', $shipping_errors); ?></div>
+	
+	<div class="field"><label for="address2"><strong>Street Address, Continued</strong></label><br /><?php create_form_input('address2', 'text', $shipping_errors); ?></div>
+	
+	<div class="field"><label for="city"><strong>City <span class="required">*</span></strong></label><br /><?php create_form_input('city', 'text', $shipping_errors); ?></div>
+	
+	<div class="field"><label for="state"><strong>State <span class="required">*</span></strong> </label><br /><?php create_form_input('state', 'select', $shipping_errors); ?></div>
+	
+	<div class="field"><label for="zip"><strong>Zip Code <span class="required">*</span></strong></label><br /><?php create_form_input('zip', 'text', $shipping_errors); ?></div>
+	
+	<div class="field"><label for="phone"><strong>Phone Number <span class="required">*</span></strong></label><br /><?php create_form_input('phone', 'text', $shipping_errors); ?></div>
+	
+	<!-- <div class="field"><label for="email"><strong>Email Address <span class="required">*</span></strong></label><br /><?php create_form_input('email', 'text', $shipping_errors); ?></div> -->
+	
+	<br clear="all" />
+	
+<div align="center"><input type="submit" value="Add Address" name="btnAddAddress" id="btnAddAddress" class="button" /></div></fieldset></form></div>
+</div>
+<!-- box end -->

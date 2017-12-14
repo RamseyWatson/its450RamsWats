@@ -1,0 +1,54 @@
+<h2>User Registration</h2>
+<div class="box alt">
+	<div class="error error-box"><?php echo (isset($error)?$error:""); ?></div>
+	<form action="" method="post">
+		<!-- <input type="hidden" name="returnUrl" value="<?php echo $returnUrl ?>"> -->
+		<div class="form-group">
+			<label for="email" class="form-control">Email</label>
+			<input type="email" id="email" name="email" class="form-control" placeholder="Please enter the email" />	
+			<span class="error"><?php echo (isset($errors['email'])? $errors['email'] : '') ?></span>
+		</div>
+		<div class="form-group">
+			<label for="password" class="form-control">Password</label>
+			<input type="password" id="password" name="password" class="form-control" placeholder="Please enter the password" />
+			<span class="error"><?php echo (isset($errors['password'])? $errors['password'] : '') ?></span>
+		</div>
+		<div class="form-group">
+			<label for="confirmPassword" class="form-control">Confirm Password</label>
+			<input type="password" id="confirmPassword" name="confirmPassword" class="form-control" placeholder="Please re-enter the password" />	
+			<span class="error"><?php echo (isset($errors['confirmPassword'])? $errors['confirmPassword'] : '') ?></span>
+		</div>
+
+		<div class="form-group">
+			<label for="firstName" class="form-control">First Name</label>
+			<input type="text" id="firstName" name="firstName" class="form-control" placeholder="Please enter your first name" />	
+			<span class="error"><?php echo (isset($errors['firstName'])? $errors['firstName'] : '') ?></span>
+		</div>
+
+		<div class="form-group">
+			<label for="lastName" class="form-control">Last Name</label>
+			<input type="text" id="lastName" name="lastName" class="form-control" placeholder="Please enter the last name" />	
+			<span class="error"><?php echo (isset($errors['lastName'])? $errors['lastName'] : '') ?></span>
+		</div>
+
+		<div class="form-group">
+			<label for="dateOfBirth" class="form-control">Date of Birth</label>
+			<input type="text" id="dateOfBirth" name="dateOfBirth" class="form-control" placeholder="Please enter the Date of Birth" />	
+			<span class="error"><?php echo (isset($errors['dateOfBirth'])? $errors['dateOfBirth'] : '') ?></span>
+		</div>
+
+		<div class="form-group">
+			<label class="form-control">Please select gender</label>
+			<input type="radio" id="rdoMale" name="gender" class="gender" value="M" /><label for="rdoMale">Male</label>
+			<input type="radio" id="rdoFemale" name="gender" class="gender" value="F" /><label for="rdoFemale">Female</label>
+			<input type="radio" id="rdoOther" name="gender" class="gender" value="O" /><label for="rdoOther">Other</label>
+			<span class="error"><?php echo (isset($errors['gender'])? $errors['gender'] : '') ?></span>
+		</div>
+		<div class="form-group">
+			<input type="submit" id="btnRegister" name="btnRegister" value="Register" class="btn" />	
+			<input type="reset" value="Clear Form" class="btn">
+		</div>
+			
+		<a href="/login<?php if(isset($returnUrl)) echo '/?returnUrl='.$returnUrl; ?>">Already Registered, Login Here</a>
+	</form>
+</div>

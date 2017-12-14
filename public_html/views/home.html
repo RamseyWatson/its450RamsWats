@@ -1,0 +1,36 @@
+<!-- box begin -->
+<div class="box alt">
+	<div class="inner">
+   	<div class="wrapper"><?php // Check for sales!
+
+// If records are returned, include the view:
+if (mysqli_num_rows($r) > 0) {
+	
+	echo '<dl class="special fright">
+		<dt><a href="/shop/sales/">Sale Items</a></dt>';
+
+	// Fetch each item:
+	while ($row = mysqli_fetch_array($r, MYSQLI_ASSOC)) {
+		echo '<dd><a href="/shop/sales/#' . $row['sku'] . '" title="View This Product"><img alt="" src="/products/' . $row['image'] . '" /><span>' . $row['sale_price'] . '</span></a></dd>';
+	}
+	
+	echo '</dl>';
+
+} // End of mysqli_num_rows() IF.
+?>
+         <h2>Welcome to Our Online Store Devices Shop!</h2>
+         <p>We Provide the best quality storage devices at the most affordabe price</p>
+         <p>Please use the links at the top to browse through our catalog. If you've been here before, you can find things you bookmarked by clicking on your Wish List and Cart links. </p>
+   	</div>
+   </div>
+</div>
+<!-- box end -->
+<!-- box begin -->
+<div class="box">
+	<div class="inner">
+   	<h3>About Store It!, Inc.</h3>
+   	<p>Store It!, Inc. has been selling Storage devices online since 2013. For first few years, Store It!, Inc. failed to make a profit, but it is now one of the leading provider of Storage devices online</p>
+   	<p>It's safe to shop here, promise!</p>
+   </div>
+</div>
+<!-- box end -->

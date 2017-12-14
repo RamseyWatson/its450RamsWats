@@ -1,0 +1,105 @@
+<div id="edit-stock" title="Update Stock">
+	<p class="error" id="stock-error"></p>
+  <form>
+		<div class="form-group">
+			<label for="dialogSKU" class="form-control">Product SKU</label>
+			<input type="text" class="form-control" name="dialogSKU" id="dialogSKU" disabled="disabled" />
+		</div>
+		<div class="form-group">
+			<label for="dialogCategory" class="form-control">Product Category</label>
+			<input type="text" class="form-control" name="dialogCategory" id="dialogCategory" disabled="disabled" />
+		</div>
+		<div class="form-group">
+			<label for="dialogSize" class="form-control">Size</label>
+			<input type="text" class="form-control" name="dialogSize" id="dialogSize" disabled="disabled" />
+		</div>
+		<div class="form-group">
+			<label for="dialogStockQty" class="form-group">Stock</label>
+			<input type="number" class="form-control" name="dialogStockQty" id="dialogStockQty" min="0" />
+		</div>
+      <!-- Allow form submission with keyboard without duplicating the dialog button -->
+      <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
+  </form>
+</div>
+
+<div id="edit-storage-product" title="Update Product">
+	<p class="error" id="storage-product-error"></p>
+  <form>
+    <div class="form-group">
+		<label for="storage-category" class="form-control">Category</label>
+		<?php create_form_input('storage-category','select',array(), 'USER',array('data'=>$storage_categories)); ?>
+	</div>
+	<div class="form-group">
+		<label for="size" class="form-control">Size</label>
+		<?php create_form_input('size','select',array(), 'USER',array('data'=>$sizes)); ?>
+	</div>
+	<div class="form-group">
+		<label for="companyName" class="form-control">Company Name</label>
+		<?php create_form_input('storageCompanyName','text',array()); ?>
+	</div>
+	<div class="form-group">
+		<label for="description" class="form-control">Description</label>
+		<?php create_form_input('storageDescription','text',array()); ?>
+	</div>
+	<div class="form-group">
+		<label for="usb2_3" class="form-control">USB</label>
+		<?php create_form_input('usb2_3','select',array(), 'USER',array('data'=>array('usb2'=>'USB 2', 'usb3' => 'USB 3'))); ?>
+	</div>
+	<div class="form-group">
+		<label for="scsi_ide" class="form-control">Connection Type</label>
+		<?php create_form_input('scsi_ide','select',array(), 'USER',array('data'=>array('ide'=>'IDE', 'scsi' => 'SCSI'))); ?>
+	</div>
+	<div class="form-group">
+		<label for="storagePrice" class="form-control">Price</label>
+		<?php create_form_input('storagePrice','number',array(), 'USER', 'min="1"'); ?>
+	</div>
+	
+  </form>
+</div>
+
+
+<h2 style="display:inline-block">Manage Products</h2> <a id="add-product" href="add_product.php"><img src="../images/add.png" alt="Add Product"></a>
+
+<?php 
+	if(mysqli_num_rows($r)){
+		?>
+	<table class="itemlist">
+		<tr>
+			<th>sku</th>
+			<th>Image</th>
+			<th>Category</th>
+			<th>Size</th>
+			<th>Company Name</th>
+			<th>Description</th>
+			<th>USB</th>
+			<th>SCSI/IDE</th>
+			<th>Price</th>
+			<th>Stock</th>
+			<th>Date Created</th>
+			<th>Operations</th>
+		</tr>
+
+<?php
+		while($product = mysqli_fetch_array($r, MYSQLI_ASSOC)) {
+			?>
+		<tr id="<?php echo $product['type'].'-'.$product['id']; ?>">
+			<td><?php echo $product['sku'] ?></td>
+			<td><img src="/images/products/<?php echo $product['image'] ?>" alt=""> </td>
+			<td><?php echo $product['category'] ?></td>
+			<td><?php echo $product['size'] ?></td>
+			<td><?php echo $product['company_name'] ?></td>
+			<td><?php echo htmlspecialchars_decode($product['description']) ?></td>
+			<td><?php echo $product['usb2_3'] ?></td>
+			<td><?php echo $product['scsi_ide'] ?></td>
+			<td>$ <?php echo $product['price'] ?></td>
+			<td><span><?php printf("%d",$product['stock']) ?></span><a class="edit-item-stock" data-product='<?php echo json_encode($product) ?>' data href="#"><img src="../images/edit.png" alt="Edit Stock"></a></td>
+			<td><?php echo $product['date_created'] ?></td>
+			<td><a data-product='<?php echo json_encode($product) ?>' class="edit-product-item" href="#"><img src="../images/edit.png" alt="Edit Product"></a></td>
+		</tr>
+
+<?php
+		}?>
+		</table>
+	<?php
+	}
+?>

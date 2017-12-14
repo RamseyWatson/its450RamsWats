@@ -1,0 +1,34 @@
+<?php // This page is included by browse.php.
+// This page displays the available storage products.
+// This page will make use of the query result $r.
+// The query returns an array of: description, image, sku, name, and stock.
+
+
+include ('./includes/product_functions.inc.php');
+?>
+<div class="box alt">
+   	<div class="inner">
+      	<h2><?php echo $category; ?></h2>
+<?php
+// Loop through the results:
+while ($row = mysqli_fetch_array($r, MYSQLI_ASSOC)) {
+	
+	?>
+		<!-- box begin -->
+		
+              	<div class="img-box">
+                 	<p><img alt="<?php echo $category; ?>" src="/images/products/<?php echo $row['image']; ?>" /><?php echo $row['description']; ?></p>
+		<p><?php echo $row['name']; ?><br />
+			<span class="item-price">$ <?php echo $row['price']; ?></span>
+			<form action="/cart.php" method="get"><input type="hidden" name="action" value="add" />
+			<input type="hidden" name="sku" value="<?php echo $row['sku'] ?>" />
+			<input type="submit" value="Add to Cart" class="button" />
+			</form>
+		</p>
+		</div>	
+<?php
+} // End of WHILE loop. 
+?>
+    </div>
+</div>
+<!-- box end -->

@@ -1,0 +1,43 @@
+#content { background: #fff; width:100%; padding:20px 100px 30px 0px; }
+#header .nav li ul a { color:#ffe7be; text-decoration:none; text-transform:none; font-size: .75em; }
+
+/* login page styles */
+#loginbox {
+    width: 300px;
+    margin: 0 auto;
+}
+
+table.itemlist{
+    border-collapse: collapse;
+    width: 100%;
+}
+
+table.itemlist td, table.itemlist th{
+    border-top: thin solid #777;
+    border-bottom: thin solid #777;
+    padding: 5px;
+    height: 40px;
+}
+
+
+table.itemlist th{
+    background-color: #ccc;
+}
+
+
+table.itemlist td img{
+    width: 30px;
+}
+
+#add-product{
+    display: inline-block;
+    height: 3em;
+    border-radius: 5px;
+    background-color: #ccc;
+    margin-bottom: 12px;
+    line-height: 1em;
+}
+
+#add-product img{
+    height: 2.5em;
+}
